@@ -70,13 +70,13 @@ so that the sum of the arc costs connecting these nodes is the minimum.
 Input is the list of all edges. 
 We keep track of two sets, the connected nodes and the nodes yet to be visited. 
 We process the edges in order of ascending weight. 
-For each processed edge, we mark the two nodes as visited and we add the edge to the solution. The algorithm stop after 
-processing all edges or when the set nodes-yet-to-be-visited is empty. We can use a connectivity algorithm like the 
-union-find for the connectivity purposes of the algorithm.
+For each processed edge, we mark the two nodes as visited and we add the edge to the solution. The algorithm stops 
+after processing all edges or when the set nodes-yet-to-be-visited is empty. We can use a connectivity algorithm like 
+the union-find for the connectivity purposes of the algorithm.
 At the end there will be a list of edges representing the minimum spanning tree. 
 
 Centrality
-There are many ways of defining centrality. Degree centrality is a measure of how likely is for a node to “catch” a 
+There are many ways of defining centrality. Degree centrality is a measure of how likely it is for a node to “catch” a 
 flow going through the network. Higher the node’s degree, higher the centrality. The degree of a node is the number of 
 adjacent edges to which it is connected. We can keep track of this number each time we add or remove edges and nodes 
 from the graph. The algorithm simply returns a list of nodes associated to their degrees.
