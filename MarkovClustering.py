@@ -63,7 +63,7 @@ class MarkovClustering(object):
             if self.steadyState(lastMatrix)==True:
                 break
             t += 1
-            
+
         return self.interpretClusters()
         
         
@@ -85,9 +85,11 @@ class MarkovClustering(object):
         """
         The matrix is raised to the e-th power (simulates the random walk)
         """
+        temp = self.matrix
         for _ in range(self.e-1):
-            self.matrix = self.matrix.dot(self.matrix) 
-    
+            temp = temp.dot(self.matrix) 
+        self.matrix = temp
+            
     def inflationStep(self):
         """
         Executes inflation on the matrix. Inflation:
@@ -95,8 +97,7 @@ class MarkovClustering(object):
         2) matrix is column normalized
         The inflation is responsible for strengthening and weakening of current.
         """
-        for (x,y), value in numpy.ndenumerate(self.matrix):
-            self.matrix[x][y] = value**self.r
+        self.matrix **= self.r 
         self.normalizeColumns();
     
     def steadyState(self, lastMatrix):
@@ -108,7 +109,7 @@ class MarkovClustering(object):
             if self.matrix[x][y]-lastMatrix[x][y] != 0:
                 return False
         return True
-    
+        
     def interpretClusters(self):
         """
         Return a list of clusters. Each cluster is a list of indexes. 
