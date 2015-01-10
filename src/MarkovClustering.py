@@ -9,20 +9,24 @@ import numpy
 class MarkovClustering(object):
     """
     MCL algorithm. 
-    Unlike some other clustering techniques like K-means clustering, in MCL 
-    the number of clusters is not predetermined. The idea is to operate random walks through the graph. 
-    While walking inside a cluster the probability of staying inside the same cluster is high. 
+    Unlike some other clustering techniques like K-means clustering, in MCL the
+    number of clusters is not predetermined. The idea is to operate random
+    walks through the graph.  While walking inside a cluster the probability of
+    staying inside the same cluster is high. 
     
     Algorithm - steps:
         1) column normalize the matrix
         2) raise the matrix to the e-th power (simulates the random walk)
-        3) raise each element to the r-th power and column normalize. It strengthens more likely currents 
-            while weakening the less likely (faster convergence).
-        4) repeat steps 2 and 3 until we are in a steady state or max number of iterations T is reached
+        3) raise each element to the r-th power and column normalize. It
+            strengthens more likely currents while weakening the less likely
+            (faster convergence).
+        4) repeat steps 2 and 3 until we are in a steady state or max number of
+            iterations T is reached
         5) interpret clusters (non-zero elements along rows)
     
-    A possible future improvement could be the pruning of cells in case of huge graphs. It is similar
-    to inflation, we set little matrix values directly to zero to speed up the process. 
+    A possible future improvement could be the pruning of cells in case of huge
+    graphs. It is similar to inflation, we set little matrix values directly to
+    zero to speed up the process. 
     Sources: 
         http://www.micans.org/mcl/ 
         http://www.cs.ucsb.edu/~xyan/classes/CS595D-2009winter/MCL_Presentation2.pdf
@@ -31,13 +35,15 @@ class MarkovClustering(object):
     def __init__(self, matrix, e, r):
         """
         Arguments:
-        matrix -- a square matrix representation of a graph. Matrix should be symmetric. 
-                    'The reason that mcl dislikes uni-directed graphs is not very mcl specific, 
-                    it has more to do with the clustering problem itself. 
-                    Somehow, directionality thwarts the notion of cluster structure.' (Stijn van Dongen)
-        e -- power parameter. The matrix is multiplied by itself e times each iteration
-        r -- inflation parameter. Increasing r will make inflation stronger and will 
-            increase granularity/tightness of clusters).
+        matrix -- a square matrix representation of a graph. Matrix should be
+            symmetric.  'The reason that mcl dislikes uni-directed graphs is not
+            very mcl specific, it has more to do with the clustering problem
+            itself.  Somehow, directionality thwarts the notion of cluster
+            structure.' (Stijn van Dongen)
+        e -- power parameter. The matrix is multiplied by itself e times each
+                iteration
+        r -- inflation parameter. Increasing r will make inflation stronger and
+            will increase granularity/tightness of clusters).
         """
         
         # numpy library is used in order to speed up matrix operations.
@@ -48,8 +54,10 @@ class MarkovClustering(object):
     def computeClusters(self, T = 100):
         """
         Returns a list of clusters. Each cluster is represented by a list of indexes.
+
         Parameter:
-        T -- max iterations, MCL can be experimentally shown to usually converge in less than ~100 steps
+        T -- max iterations, MCL can be experimentally shown to usually
+            converge in less than ~100 steps
         """
  
         self.addSelfLoops()
@@ -126,9 +134,3 @@ class MarkovClustering(object):
             if flag==1:
                 res.append(cluster)
         return res
-    
-    
-    
-      
-      
-      

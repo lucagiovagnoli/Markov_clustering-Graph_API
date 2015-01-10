@@ -4,21 +4,21 @@ Created on Apr 29, 2014
 @author: luca
 """
 
-import numpy
+import numpy 
 import Graph
 import MarkovClustering
         
-f = open("graph.txt","r")
+f = open("../input_graph.txt","r")
 
 grafo = Graph.Graph()
 for line in f:
     edges = line.split()
     grafo.addNode(edges[0], edges[0])
     grafo.addNode(edges[1], edges[1])
-    grafo.addEdge(edges[0],edges[1])
+    grafo.addEdge(edges[0], edges[1])
 
 
-print "Graph adjaceny list representation: \n",grafo    
+print "Graph adjacency list representation: \n",grafo    
 
 matrix, mapBackToKeys = grafo.getGraphMatrix()
 numpymat = numpy.array(matrix)

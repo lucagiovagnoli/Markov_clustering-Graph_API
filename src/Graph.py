@@ -8,7 +8,8 @@ class Node(object):
     
     def __init__(self, value):
         self.value = value
-        # A dictionary is used for neighbors. keys are neighbor nodes keys, values are weights of arcs between nodes
+        # A dictionary is used for neighbors. keys are neighbor nodes keys, 
+        # values are weights of arcs between nodes
         self.neighbors = {}
         self.inDegree = 0
         self.outDegree = 0
@@ -29,17 +30,19 @@ class Node(object):
         
 class Graph(object):
     """
-    The Graph is represented using the adjacency list method. It is slower than the matrix representation
-    but better from a memory point of view if the graph is sparse. The list of nodes is a python
-    dictionary in order to be able to retrieve node's information and list of neighbors in O(1). The lists
-    of neighbors are python dictionaries too, so it takes O(1) to retrieve a edge's weight.  
+    The Graph is represented using the adjacency list method. It is slower than
+    the matrix representation but better from a memory point of view if the
+    graph is sparse. The list of nodes is a python dictionary in order to be
+    able to retrieve node's information and list of neighbors in O(1). The
+    lists of neighbors are python dictionaries too, so it takes O(1) to
+    retrieve a edge's weight.  
     """
 
     def __init__(self, directedGraph=False):
         """
         Arguments:
-        directedGraph -- must be True for creating a directed graph, False otherwise.
-                         default is False (undirected graph).
+        directedGraph - must be True for creating a directed graph, False
+                        otherwise.  default is False (undirected graph).
         """
         
         self.directedGraph = directedGraph
@@ -175,17 +178,18 @@ class Graph(object):
         
     def DepthFirstSearch(self, key1, key2):
         """
-        Computes a path from node with key1 to node with key2 using depth first search.
-        Returns the path as a list of node's keys.
+        Computes a path from node with key1 to node with key2 using depth first
+        search.  Returns the path as a list of node's keys.
         """
         pass 
     
     def Dijkstra(self, key1):
         """
-        Computes the shortest path between node with key1 and all other nodes. 
-        Returns a dictionary. Every node's key in the dictionary stores the cost of the path and 
-        the last node traversed to get there (part of the best path). It is possible to build a 
-        shortest path from the starting node to all others using this information. 
+        Computes the shortest path between node with key1 and all other nodes.
+        Returns a dictionary. Every node's key in the dictionary stores the
+        cost of the path and the last node traversed to get there (part of the
+        best path). It is possible to build a shortest path from the starting
+        node to all others using this information. 
         """
         pass
         
@@ -198,25 +202,29 @@ class Graph(object):
     
     def degreeCentrality(self, key):   
         """
-        Computes centrality of all nodes in the graph as the number of inDegree connections.
-        Returns a dictionary of keys associated to inDegree values (key:inDegree)
+        Computes centrality of all nodes in the graph as the number of inDegree
+        connections.  Returns a dictionary of keys associated to inDegree
+        values (key:inDegree)
         """
         pass
         
     def UnionFind(self):
         """
-        Computes connectivity between nodes in the graph. Implemented with the quick-find method, 
-        it takes time for getting the result but then the connectivity lookup is O(1).
-        Returns a dictionary where each key corresponds to a value (equal for elements connected together).
+        Computes connectivity between nodes in the graph. Implemented with the
+        quick-find method, it takes time for getting the result but then the
+        connectivity lookup is O(1).  Returns a dictionary where each key
+        corresponds to a value (equal for elements connected together).
         """
         pass
 
     def getGraphMatrix(self):
         """
-        Computes the matrix representation of the graph to be used in the MarkovClustering algorithm or any
-        other possible future algorithm implementation needing a matrix representation.
-        Returns a tuple (matrix, mapIndexesToKeys) where mapIndexesToKeys is needed to map back the row and 
-        column indexes to keys values. 
+        Computes the matrix representation of the graph to be used in the 
+        MarkovClustering algorithm or any other possible future algorithm 
+        implementation needing a matrix representation. 
+
+        :returns: a tuple (matrix, mapIndexesToKeys) where mapIndexesToKeys 
+        is needed to map back the row and column indexes to keys values. 
         """
         mapKeysToIndexes = {}
         mapIndexesToKeys = [None] * self.nodesCount
@@ -226,10 +234,12 @@ class Graph(object):
             mapIndexesToKeys[c] = k
             c += 1
         
-        matrix = [[0 for _ in range(self.nodesCount)] for _ in range(self.nodesCount)]
+        matrix = [[0 for _ in range(self.nodesCount)] 
+                for _ in range(self.nodesCount)]
         for k in self.nodes:
             for k1 in self.nodes[k].neighbors:
-                matrix[mapKeysToIndexes[k]][mapKeysToIndexes[k1]] = self.nodes[k].neighbors[k1]
+                matrix[mapKeysToIndexes[k]][mapKeysToIndexes[k1]] = \
+                        self.nodes[k].neighbors[k1]
          
         return (matrix, mapIndexesToKeys)
                 
