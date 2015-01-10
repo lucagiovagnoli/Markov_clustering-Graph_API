@@ -131,10 +131,10 @@ class Graph(object):
         for k in self.nodes:
             for k1 in self.nodes[k].neighbors:
                 if self.directedGraph: 
-                    res.append((k,k1,self.nodes[k].getEdgeWeight(k1)))
+                    res.append((k,k1))
                 else:
-                    if (k1, k, self.nodes[k].getEdgeWeight(k1)) not in res:
-                        res.append((k, k1, self.nodes[k].getEdgeWeight(k1)))
+                    if (k1, k) not in res:
+                        res.append((k, k1))
         return res
         
     def getNeighbours(self, key):
